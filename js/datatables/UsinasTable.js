@@ -1,6 +1,9 @@
 import { PowerPlantsType } from "../usinas/PowerPlantsType.js";
 
 const usinasTable = () => {
+    const defaultSqlURL = 'https://dadosabertos.aneel.gov.br/api/3/action/datastore_search_sql';
+    const defaultTable = '75419902-c692-498b-a6ef-85f6d4beb5b2'
+
     const build = (parameters) => {
         if (parameters.operationTypes.length === 2) {
             testeAndComercialTable(parameters);
@@ -20,11 +23,11 @@ const usinasTable = () => {
             serverSide: false,
             bDestroy: true,
             ajax: {
-                url: 'https://dadosabertos.aneel.gov.br/api/3/action/datastore_search_sql',
+                url: defaultSqlURL,
                 type: 'POST',
                 dataType: "jsonp",
                 data: {
-                    sql: `SELECT * from \"75419902-c692-498b-a6ef-85f6d4beb5b2\" WHERE (\"DatLiberOpComerRealizado\" BETWEEN \'${parameters.publishFrom}\' AND  \'${parameters.publishTo}\') OR (\"DatLiberOpTesteRealizado\" BETWEEN \'${parameters.publishFrom}\' AND \'${parameters.publishTo}\')`
+                    sql: `SELECT * from \"${defaultTable}\" WHERE (\"DatLiberOpComerRealizado\" BETWEEN \'${parameters.publishFrom}\' AND  \'${parameters.publishTo}\') OR (\"DatLiberOpTesteRealizado\" BETWEEN \'${parameters.publishFrom}\' AND \'${parameters.publishTo}\')`
                 },
                 dataSrc: response => {
                     return response.result.records;

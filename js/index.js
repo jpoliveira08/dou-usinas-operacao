@@ -1,4 +1,4 @@
-import { UrlBuilder } from "./url/UrlBuilder.js";
+import { AdvancedSearch } from "./dou/AdvancedSearch.js";
 import { UsinasTable } from "./datatables/UsinasTable.js";
 
 $('#check_dou').click(() => {
@@ -9,9 +9,10 @@ $('#check_dou').click(() => {
 
     const parameters = hydrateInputDateAmericanToBrazilian();
 
-    const advancedSearchDouUrl = UrlBuilder.buildUrl(parameters);
-
-    window.open(advancedSearchDouUrl, '_blank');
+    window.open(
+        AdvancedSearch.getPowerPlantReleasePage(parameters),
+        '_blank'
+    );
 });
 
 $('#load_table').click(() => {
